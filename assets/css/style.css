@@ -26,6 +26,9 @@ h2 {
     text-align: left;
     display: flex;
     flex-wrap: wrap;
+    margin: 0px 200px 10px 200px;
+}
+.quiz-box {
     margin: 0px 200px;
 }
 
@@ -58,5 +61,16 @@ h2 {
     justify-content: space-between;
     align-content: center;
     width: 20%;
-    margin: 0px, 0px, 0px, 200px;
+    margin: 0px 0px 0px 200px;
+}
+
+.result {
+    font-size: 28px;
+    font-style: italic;
+    color: lightslategray;
+    border-top: 1px solid lightslategray;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 200px 0px 200px;
 }

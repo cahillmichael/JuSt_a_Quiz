@@ -1,5 +1,6 @@
 var startBtn = document.querySelector("#start-btn");
 var quizBox = document.querySelector("#quiz-box");
+var resultsBox = document.querySelector("#results");
 var qCount = 0;
 
 var allQuestions = [
@@ -11,7 +12,7 @@ var allQuestions = [
             3: "Alerts",
             4: "Numbers",
         },
-        correctAnswer: "Alerts",
+        correctAnswer: "3. Alerts",
     },
     {
         question: "The condition in an if/else statement is enclosed with _____.",
@@ -21,7 +22,7 @@ var allQuestions = [
             3: "Square Brackets",
             4: "Parentheses",
         },
-        correctAnswer: "Parentheses",
+        correctAnswer: "4. Parentheses",
     },
     {
         question: "Arrays in JavaScript can be used to store _____.",
@@ -31,7 +32,7 @@ var allQuestions = [
             3: "Booleans",
             4: "All of the Above",
         },
-        correctAnswer: "All of the Above",
+        correctAnswer: "4. All of the Above",
     },
     {
         question: "String values must be enclosed in _____ when being assigned to variables.",
@@ -41,7 +42,7 @@ var allQuestions = [
             3: "Curly Brackets",
             4: "Parentheses",
         },
-        correctAnswer: "Quotes",
+        correctAnswer: "2. Quotes",
     },   
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
@@ -51,13 +52,17 @@ var allQuestions = [
             3: "For Loops",
             4: "Console.log",
         },
-        correctAnswer: "Console.log",
+        correctAnswer: "4. Console.log",
     },    
 ]
 
 //clear quiz box
 var clearQuizBox = function() {
     quizBox.innerHTML = "";
+}
+//clear results box
+var clearResults = function() {
+    resultsBox.innerHTML = "";
 }
 
 //start quiz
@@ -96,13 +101,42 @@ var newQuestion = function() {
         answer3.textContent = "3. " + allQuestions[qCount].answers[3];
         answer4.textContent = "4. " + allQuestions[qCount].answers[4];
 
+        answer1.setAttribute("correct-answer", allQuestions[qCount].correctAnswer);
+        answer2.setAttribute("correct-answer", allQuestions[qCount].correctAnswer);
+        answer3.setAttribute("correct-answer", allQuestions[qCount].correctAnswer);
+        answer4.setAttribute("correct-answer", allQuestions[qCount].correctAnswer);
+
+        answer1.setAttribute("onclick", "checkAnswer()");
+        answer2.setAttribute("onclick", "checkAnswer()");
+        answer3.setAttribute("onclick", "checkAnswer()");
+        answer4.setAttribute("onclick", "checkAnswer()");
+
         quizBox.appendChild(questionText);
         quizBox.appendChild(answers);
         answers.appendChild(answer1);
         answers.appendChild(answer2);
         answers.appendChild(answer3);
         answers.appendChild(answer4);
-    }
+    };
 }
+
+//check answer
+var checkAnswer = function() {
+        clearResults();
+    if(event.target.getAttribute("correct-answer") === event.target.textContent){
+        //time adjust
+        var reportResult = document.createElement("h3");
+        reportResult.textContent = "Correct!";
+        reportResult.className = "result";
+        resultsBox.appendChild(reportResult);
+    } else {
+        var reportResult = document.createElement("h3");
+        reportResult.textContent = "Wrong!";
+        reportResult.className = "result";
+        resultsBox.appendChild(reportResult);
+    };
+    qCount++;
+    newQuestion();
+};
 
 startBtn.addEventListener("click", startQuiz);
