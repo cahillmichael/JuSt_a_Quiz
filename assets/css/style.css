@@ -28,6 +28,7 @@ h2 {
     flex-wrap: wrap;
     margin: 0px 200px 10px 200px;
 }
+
 .quiz-box {
     margin: 0px 200px;
 }
@@ -60,7 +61,7 @@ h2 {
     flex-direction: column;
     justify-content: space-between;
     align-content: center;
-    width: 20%;
+    width: 30%;
     margin: 0px 0px 0px 200px;
 }
 
@@ -73,4 +74,8 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     margin: 10px 200px 0px 200px;
+}
+
+.outOfTimeHeader {
+    color: red;
 }

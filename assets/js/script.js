@@ -1,6 +1,8 @@
 var startBtn = document.querySelector("#start-btn");
 var quizBox = document.querySelector("#quiz-box");
 var resultsBox = document.querySelector("#results");
+var timeDisplay = document.querySelector("#timer");
+var time = 75;
 var qCount = 0;
 
 var allQuestions = [
@@ -56,6 +58,26 @@ var allQuestions = [
     },    
 ]
 
+//timer function
+function timeInterval() {
+    interval = setInterval(function() {
+
+        timeDisplay.textContent = "Time: " + time;
+        time--;
+
+        if (time === 0) {
+            clearInterval(interval);
+            timeDisplay.textContent = "Done.";
+            clearQuizBox();
+            clearResults();
+            var outOfTime = document.createElement("h2");
+            outOfTime.className = "outOfTimeHeader";
+            outOfTime.textContent = "Time has elapsed. You've failed.";
+            quizBox.appendChild(outOfTime);
+        }
+    }, 1000);
+}
+
 //clear quiz box
 var clearQuizBox = function() {
     quizBox.innerHTML = "";
@@ -69,6 +91,7 @@ var clearResults = function() {
 var startQuiz = function() {
 
     clearQuizBox();
+    timeInterval();
     newQuestion();
 }
 
@@ -124,7 +147,7 @@ var newQuestion = function() {
 var checkAnswer = function() {
         clearResults();
     if(event.target.getAttribute("correct-answer") === event.target.textContent){
-        //time adjust
+        //time adjust !!!!
         var reportResult = document.createElement("h3");
         reportResult.textContent = "Correct!";
         reportResult.className = "result";
