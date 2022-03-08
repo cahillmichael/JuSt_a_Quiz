@@ -105,11 +105,12 @@ var newQuestion = function() {
         clearQuizBox();
         
         var questionText = document.createElement("h2");
-        questionText.className = "questionHeader";
+        questionText.className = "question-header";
         questionText.textContent = allQuestions[qCount].question;
 
         var answers = document.createElement("div");
         answers.className = "answers";
+
         var answer1 = document.createElement("button");
         var answer2 = document.createElement("button");
         var answer3 = document.createElement("button");
@@ -167,8 +168,36 @@ var checkAnswer = function() {
 var displayScore = function(interval) {
     clearInterval(interval);
     clearQuizBox();
-    timeDisplay.textContent = "Fin."
-    console.log(time);
+    timeDisplay.textContent = "Fin.";
+    
+    var scoreHeader = document.createElement("h2");
+    scoreHeader.className = "question-header";
+    scoreHeader.textContent = "All done!";
+
+    var scoreReport = document.createElement("h3");
+    scoreReport.className = "score-report";
+    scoreReport.textContent = "Your final score is " + time + ".";
+
+    var saveDiv = document.createElement("div");
+    saveDiv.className = "save-div";
+
+    var enterInitials = document.createElement("h3");
+    // enterInitials.className = "score-report";
+    enterInitials.textContent = "Enter Initials:";
+
+    var initialsInput = document.createElement("input");
+    initialsInput.className = "initials-input";
+
+    var submitScore = document.createElement("button");
+    submitScore.className = "submit-btn";
+    submitScore.textContent = "Submit";
+
+    quizBox.appendChild(scoreHeader);
+    quizBox.appendChild(scoreReport);
+    quizBox.appendChild(saveDiv);
+    saveDiv.appendChild(enterInitials);
+    saveDiv.appendChild(initialsInput);
+    saveDiv.appendChild(submitScore);
 }
 
 startBtn.addEventListener("click", startQuiz);

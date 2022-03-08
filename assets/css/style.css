@@ -22,7 +22,7 @@ h2 {
     font-size: 40px;
 }
 
-.questionHeader {
+.question-header {
     text-align: left;
     display: flex;
     flex-wrap: wrap;
@@ -78,4 +78,40 @@ h2 {
 
 .outOfTimeHeader {
     color: red;
+}
+
+h3 {
+    font-size: 28px;
+    text-align: left;
+}
+
+.save-div {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin: 0px 200px 0px 200px;
+}
+
+.score-report {
+    margin: 0px 200px;
+}
+
+.submit-btn {
+    background-color: #351c75;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 6px;
+    height: fit-content;
+    padding: 10px 20px;
+}
+
+.initials-input {
+    font-size: 28px;
+    height: fit-content;
+    width: 200px;
+    margin: 0px 20px;
+    border: solid;
+    border-color: lightslategrey;
+    border-width: 1px;
 }
