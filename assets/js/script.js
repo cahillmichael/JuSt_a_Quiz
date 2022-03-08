@@ -67,7 +67,7 @@ function timeInterval() {
 
         if (time === 0) {
             clearInterval(interval);
-            timeDisplay.textContent = "Done.";
+            timeDisplay.textContent = "Fin.";
             clearQuizBox();
             clearResults();
             var outOfTime = document.createElement("h2");
@@ -99,6 +99,7 @@ var startQuiz = function() {
 var newQuestion = function() {
     if(qCount >= allQuestions.length){
         clearQuizBox();
+        displayScore(interval);
     }
     else{
         clearQuizBox();
@@ -147,12 +148,12 @@ var newQuestion = function() {
 var checkAnswer = function() {
         clearResults();
     if(event.target.getAttribute("correct-answer") === event.target.textContent){
-        //time adjust !!!!
         var reportResult = document.createElement("h3");
         reportResult.textContent = "Correct!";
         reportResult.className = "result";
         resultsBox.appendChild(reportResult);
     } else {
+        time = time - 10;
         var reportResult = document.createElement("h3");
         reportResult.textContent = "Wrong!";
         reportResult.className = "result";
@@ -161,5 +162,13 @@ var checkAnswer = function() {
     qCount++;
     newQuestion();
 };
+
+//display and record score
+var displayScore = function(interval) {
+    clearInterval(interval);
+    clearQuizBox();
+    timeDisplay.textContent = "Fin."
+    console.log(time);
+}
 
 startBtn.addEventListener("click", startQuiz);
