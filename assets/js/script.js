@@ -2,6 +2,8 @@ var startBtn = document.querySelector("#start-btn");
 var quizBox = document.querySelector("#quiz-box");
 var resultsBox = document.querySelector("#results");
 var timeDisplay = document.querySelector("#timer");
+var headerBar = document.querySelector("#header-bar")
+var scores = [];
 var time = 75;
 var qCount = 0;
 
@@ -164,7 +166,7 @@ var checkAnswer = function() {
     newQuestion();
 };
 
-//display and record score
+//display score
 var displayScore = function(interval) {
     clearInterval(interval);
     clearQuizBox();
@@ -187,10 +189,13 @@ var displayScore = function(interval) {
 
     var initialsInput = document.createElement("input");
     initialsInput.className = "initials-input";
+    initialsInput.id = "initials-input";
 
     var submitScore = document.createElement("button");
     submitScore.className = "submit-btn";
     submitScore.textContent = "Submit";
+    submitScore.setAttribute("type", "submit");
+    submitScore.setAttribute("onclick", "loadScores()");
 
     quizBox.appendChild(scoreHeader);
     quizBox.appendChild(scoreReport);
@@ -198,6 +203,32 @@ var displayScore = function(interval) {
     saveDiv.appendChild(enterInitials);
     saveDiv.appendChild(initialsInput);
     saveDiv.appendChild(submitScore);
+}
+
+//load scores
+var loadScores = function() {
+    // clearQuizBox();
+    // clearResults();
+    // headerBar.innerHTML = "";
+    var pastScores = localStorage.getItem("scores");
+    if (!pastScores) {
+        return false;
+    }
+    else {
+        scores = JSON.parse(pastScores);
+    }
+    saveScore();
+}
+
+//save score
+var saveScore = function() {
+    var scoreInfo = {
+        initialsInput: document.getElementById("initials-input").value,
+        score: time
+    };
+    
+    scores.push(scoreInfo);
+    localStorage.setItem("scores", JSON.stringify(scores));
 }
 
 startBtn.addEventListener("click", startQuiz);
