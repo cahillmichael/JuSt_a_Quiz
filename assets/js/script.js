@@ -2,7 +2,8 @@ var startBtn = document.querySelector("#start-btn");
 var quizBox = document.querySelector("#quiz-box");
 var resultsBox = document.querySelector("#results");
 var timeDisplay = document.querySelector("#timer");
-var headerBar = document.querySelector("#header-bar")
+var headerBar = document.querySelector("#header-bar");
+var viewScores = document.querySelector("#high-scores");
 var scores = [];
 var time = 75;
 var qCount = 0;
@@ -207,12 +208,9 @@ var displayScore = function(interval) {
 
 //load scores
 var loadScores = function() {
-    // clearQuizBox();
-    // clearResults();
-    // headerBar.innerHTML = "";
     var pastScores = localStorage.getItem("scores");
     if (!pastScores) {
-        return false;
+        saveScore();
     }
     else {
         scores = JSON.parse(pastScores);
@@ -226,9 +224,43 @@ var saveScore = function() {
         initialsInput: document.getElementById("initials-input").value,
         score: time
     };
-    
     scores.push(scoreInfo);
     localStorage.setItem("scores", JSON.stringify(scores));
+    displaySaved();
 }
 
+//display saved scores
+var displaySaved = function() {
+    clearQuizBox();
+    clearResults();
+    headerBar.innerHTML = "";
+
+    var savedHeader = document.createElement("h2");
+    savedHeader.textContent = "High Scores"
+    quizBox.appendChild(savedHeader);
+
+    var scoreList = document.createElement("ul");
+    scoreList.className = "score-list"
+    quizBox.appendChild(scoreList);
+
+    var savedScores = localStorage.getItem("scores");
+    scoreInfo = JSON.parse(savedScores);
+
+    for (var i = 0; i < scoreInfo.length; i++) {
+        var singleScore = document.createElement("li")
+        singleScore.textContent = scoreInfo[i].initialsInput + " : " + scoreInfo[i].score;  
+        scoreList.appendChild(singleScore);
+        };
+    
+    var goBack = document.createElement("button")
+    goBack.className = "start-btn";
+    goBack.textContent = "Play Again";
+    goBack.setAttribute("onclick", "window.location.reload()");
+    quizBox.appendChild(goBack);
+}
+
+//start quiz
 startBtn.addEventListener("click", startQuiz);
+
+//view scores
+viewScores.addEventListener("click", displaySaved);
