@@ -1,3 +1,4 @@
+//declare necessary variables
 var startBtn = document.querySelector("#start-btn");
 var quizBox = document.querySelector("#quiz-box");
 var resultsBox = document.querySelector("#results");
@@ -8,6 +9,7 @@ var scores = [];
 var time = 75;
 var qCount = 0;
 
+//declare quiz questions as an array of objects
 var allQuestions = [
     {
         question: "Commonly used data types do NOT include:",
@@ -61,7 +63,7 @@ var allQuestions = [
     },    
 ]
 
-//timer function
+//timer function including handling of out of time case
 function timeInterval() {
     interval = setInterval(function() {
 
@@ -81,16 +83,16 @@ function timeInterval() {
     }, 1000);
 }
 
-//clear quiz box
+//clear quiz-box, main element of html
 var clearQuizBox = function() {
     quizBox.innerHTML = "";
 }
-//clear results box
+//clear results, footer element of html
 var clearResults = function() {
     resultsBox.innerHTML = "";
 }
 
-//start quiz
+//start quiz, clear main element, start timer, initiate question flow
 var startQuiz = function() {
 
     clearQuizBox();
@@ -98,7 +100,7 @@ var startQuiz = function() {
     newQuestion();
 }
 
-//load new question data
+//load new question data, create elements and populate from quiz questions array
 var newQuestion = function() {
     if(qCount >= allQuestions.length){
         clearQuizBox();
@@ -148,7 +150,7 @@ var newQuestion = function() {
     };
 }
 
-//check answer
+//check answer, triggered by answer button click
 var checkAnswer = function() {
         clearResults();
     if(event.target.getAttribute("correct-answer") === event.target.textContent){
@@ -167,7 +169,7 @@ var checkAnswer = function() {
     newQuestion();
 };
 
-//display score
+//display score, stop timer, and collect user initials
 var displayScore = function(interval) {
     clearInterval(interval);
     clearQuizBox();
@@ -229,7 +231,7 @@ var saveScore = function() {
     displaySaved();
 }
 
-//display saved scores
+//display saved scores; accessed by completing data input or click view high scores
 var displaySaved = function() {
     clearQuizBox();
     clearResults();
